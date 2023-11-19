@@ -10,18 +10,24 @@ document.addEventListener('DOMContentLoaded', () =>{
           numInput = document.createElement('input'),
           btnNthBlock = document.createElement('button'),
           body = document.querySelector('body');
-          
-    body.append(inputText);
-    body.append(btnLogInput);
-    body.append(btnClearInput);
-    body.append(btnBlockInput);
-    body.append(btnHideInput);
-    body.append(btnRandomColor);
-    body.append(btnCreateBlock);
-    body.append(removeLastblock);
-    body.append(numInput);
-    body.append(btnNthBlock);
+        
+    const arrDOM = [
+        inputText, 
+        btnLogInput, 
+        btnClearInput, 
+        btnBlockInput,
+        btnHideInput,
+        btnRandomColor,
+        btnCreateBlock,
+        removeLastblock,
+        numInput,
+        btnNthBlock
+    ];
 
+    arrDOM.forEach(item => {
+        body.append(item);
+    });
+    
     btnLogInput.textContent = 'log input';
     btnClearInput.textContent = 'clear input';
     btnBlockInput.textContent = 'block input';
@@ -30,26 +36,6 @@ document.addEventListener('DOMContentLoaded', () =>{
     btnCreateBlock.textContent = 'create block';
     removeLastblock.textContent = 'remove last block';
     btnNthBlock.textContent = 'remove Nth block';
-
-    btnLogInput.addEventListener('click', (e) => {
-        e.preventDefault();
-        console.log(inputText.value);
-    });
-
-    btnClearInput.addEventListener('click', (e) =>{
-        e.preventDefault();
-        inputText.value = '';
-    });
-
-    btnBlockInput.addEventListener('click', (e) => {
-        e.preventDefault();
-        inputText.disabled = !inputText.disabled;
-    });
-
-    btnHideInput.addEventListener('click', (e) => {
-        e.preventDefault();
-        inputText.style.display = (inputText.style.display === 'none') ? 'block' : 'none';
-    });
 
     function fillRandomColor() {
         const colors = ['black', 'red', 'green', 'blue'];
@@ -84,6 +70,26 @@ document.addEventListener('DOMContentLoaded', () =>{
         inputText.value = '';
         body.removeChild(blocks[num - 1]);     
     }
+
+    btnLogInput.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log(inputText.value);
+    });
+
+    btnClearInput.addEventListener('click', (e) =>{
+        e.preventDefault();
+        inputText.value = '';
+    });
+
+    btnBlockInput.addEventListener('click', (e) => {
+        e.preventDefault();
+        inputText.disabled = !inputText.disabled;
+    });
+
+    btnHideInput.addEventListener('click', (e) => {
+        e.preventDefault();
+        inputText.style.display = (inputText.style.display === 'none') ? 'block' : 'none';
+    });
 
     btnRandomColor.addEventListener('click', fillRandomColor);
     btnCreateBlock.addEventListener('click', createBlock);
