@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', () =>{
     removeLastblock.textContent = 'remove last block';
     btnNthBlock.textContent = 'remove Nth block';
 
+    numInput.setAttribute("type", "number");
+    numInput.setAttribute("placeholder", "number");
+
     function fillRandomColor() {
         const colors = ['black', 'red', 'green', 'blue'];
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
