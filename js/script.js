@@ -9,7 +9,9 @@ document.addEventListener('DOMContentLoaded', () =>{
           removeLastblock = document.createElement('button'),
           numInput = document.createElement('input'),
           btnNthBlock = document.createElement('button'),
-          body = document.querySelector('body');
+          body = document.querySelector('body'),
+          colors = ['black', 'red', 'green', 'blue']; // podobnoe luchshe vinosit v globalnuu oblast vidimosti +
+
         
     const arrDOM = [
         inputText, 
@@ -41,42 +43,53 @@ document.addEventListener('DOMContentLoaded', () =>{
     numInput.setAttribute("placeholder", "number");
 
     function fillRandomColor() {
-        const colors = ['black', 'red', 'green', 'blue'];
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
-
         inputText.style.color = randomColor;
     }
 
-    function createBlock() {
+    function createBlock() {// dobavit proverku na nalichie input value  
         const newBlock = document.createElement('div');
 
-        newBlock.textContent = inputText.value;
-        inputText.value = '';
+        if(inputText.value == '') {
+
+        } else {
+            newBlock.textContent = inputText.value;
+            inputText.value = '';
 
         body.append(newBlock);
+        }
     }
 
     function deleteLastBlock() {
         const allBlocks = document.querySelectorAll('div'),
         blocks = Array.from(allBlocks);
+        if(blocks.length !== 0) {
+            body.removeChild(blocks[blocks.length - 1]);
+        }
         
-        body.removeChild(blocks[blocks.length - 1]);
-        console.log(blocks);
+        
     }
 
-    function deleteNthBlock() {
+    function deleteNthBlock() {// sdelat proverku na nalichie detei
         const allBlocks = document.querySelectorAll('div'),
-              blocks = Array.from(allBlocks);
-        
-        const num = parseInt(numInput.value);
-        console.log(typeof(num));
-        inputText.value = '';
-        body.removeChild(blocks[num - 1]);     
+        blocks = Array.from(allBlocks);
+        if(numInput.value !== '' && blocks.length !== 0) {
+            const num = parseInt(numInput.value);
+
+            inputText.value = '';
+            body.removeChild(blocks[num - 1]);  
+        } else {
+            console.log('вы не ввели число!');
+        }
+       
     }
 
     btnLogInput.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log(inputText.value);
+        if(inputText.value !== '' &&inputText.value !== ' ' ) {
+            console.log(inputText.value);
+        }
+        
     });
 
     btnClearInput.addEventListener('click', (e) =>{
@@ -93,11 +106,10 @@ document.addEventListener('DOMContentLoaded', () =>{
         e.preventDefault();
         inputText.style.display = (inputText.style.display === 'none') ? 'block' : 'none';
     });
-
+// removing event listeners
     btnRandomColor.addEventListener('click', fillRandomColor);
     btnCreateBlock.addEventListener('click', createBlock);
     removeLastblock.addEventListener('click', deleteLastBlock);
     btnNthBlock.addEventListener('click', deleteNthBlock);
-
 
 });
