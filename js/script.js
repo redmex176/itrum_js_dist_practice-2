@@ -42,17 +42,17 @@ document.addEventListener('DOMContentLoaded', () =>{
     numInput.setAttribute("type", "number");
     numInput.setAttribute("placeholder", "number");
 
-    function fillRandomColor() {
-        
+    function fillRandomColor() {  
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
         inputText.style.color = randomColor;
     }
 
     function createBlock() { 
         const newBlock = document.createElement('div');
+        const newText = inputText.value.trim();
 
-        if(inputText.value == '') {
-            alert("вы не ввели значение");
+        if(newText == '') {
+            console.log('вы не ввели значение!');
         } else {
             newBlock.textContent = inputText.value;
             inputText.value = '';
@@ -66,9 +66,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         blocks = Array.from(allBlocks);
         if(blocks.length !== 0) {
             body.removeChild(blocks[blocks.length - 1]);
-        }
-        
-        
+        } 
     }
 
     function deleteNthBlock() {
