@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () =>{
           numInput = document.createElement('input'),
           btnNthBlock = document.createElement('button'),
           body = document.querySelector('body'),
-          colors = ['black', 'red', 'green', 'blue']; // podobnoe luchshe vinosit v globalnuu oblast vidimosti +
+          colors = ['black', 'red', 'green', 'blue'];
 
         
     const arrDOM = [
@@ -43,15 +43,16 @@ document.addEventListener('DOMContentLoaded', () =>{
     numInput.setAttribute("placeholder", "number");
 
     function fillRandomColor() {
+        
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
         inputText.style.color = randomColor;
     }
 
-    function createBlock() {// dobavit proverku na nalichie input value  
+    function createBlock() { 
         const newBlock = document.createElement('div');
 
         if(inputText.value == '') {
-
+            alert("вы не ввели значение");
         } else {
             newBlock.textContent = inputText.value;
             inputText.value = '';
@@ -70,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         
     }
 
-    function deleteNthBlock() {// sdelat proverku na nalichie detei
+    function deleteNthBlock() {
         const allBlocks = document.querySelectorAll('div'),
         blocks = Array.from(allBlocks);
         if(numInput.value !== '' && blocks.length !== 0) {
@@ -79,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () =>{
             inputText.value = '';
             body.removeChild(blocks[num - 1]);  
         } else {
-            console.log('вы не ввели число!');
+            alert("вы не ввели значение");
         }
        
     }
@@ -106,10 +107,12 @@ document.addEventListener('DOMContentLoaded', () =>{
         e.preventDefault();
         inputText.style.display = (inputText.style.display === 'none') ? 'block' : 'none';
     });
-// removing event listeners
+
     btnRandomColor.addEventListener('click', fillRandomColor);
     btnCreateBlock.addEventListener('click', createBlock);
     removeLastblock.addEventListener('click', deleteLastBlock);
     btnNthBlock.addEventListener('click', deleteNthBlock);
+    
+   
 
 });
